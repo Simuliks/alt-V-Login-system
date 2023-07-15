@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animate.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <title>Auth</title>
+</head>
+<body>
+    <div id='app' class='auth__background'>
+        <div style='height: 100%; width: 100%; left: 60%; top: 50%; filter: blur(0.6vw); z-index: 0;' class='auth__npc'></div>
+        <div style="animation: Slade 1s ease 0s 1 normal forwards;" class='auth__npc'></div>
+        <div class='auth__menu animate__animated animate__fadeIn'>
+            <div class='auth__menu_navbar'>
+                <div v-for='(button, index) in pageList' :key='index' v-bind:class='[button === page ? "auth__menu_navbar_button_acitve" : "auth__menu_navbar_button"]'  @click='page = button'>{{button}}</div>
+            </div>
+
+            <div id="notvalid">
+                <h1><i class="fa-solid fa-circle-exclamation icon"></i> Neteisingai suvesti duomenys!</h1>
+            </div>
+
+
+            <div class='auth__menu_inputmenu'>
+            <input v-if='page === "Prisijungimas" || page === "Registracija"' id='login' type='text' class='auth__input' placeholder="Vardas_Pavardė" />
+            <input v-if='page === "Registracija"' id='email' class='auth__input' placeholder="El. Paštas" />
+            <input v-if='page === "Prisijungimas" || page === "Registracija"' id='pass' type='password' class='auth__input' placeholder="Slaptažodis" />
+            <input v-if='page === "Registracija"' id='re_pass' type='password' class='auth__input' placeholder="Pakartoti slaptažodį" />
+            </div>
+
+            <div @click='handleClick(page)' v-if='page === "Prisijungimas"' class='auth__menu_button'>Prisijungti</div>
+            <div @click='handleClick(page)' v-if='page === "Registracija"' class='auth__menu_button'>Registruotis</div>
+
+        </div>
+    </div>
+</body>
+<script>
+    window.addEventListener('load', function () {
+        if ('alt' in window) {
+            alt.emit('cef::auth:ready')
+        }});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src='app.js'></script>
+</html>
